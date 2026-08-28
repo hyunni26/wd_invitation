@@ -9,7 +9,7 @@
 <!-- 카카오톡 등 링크 공유 시 미리보기 -->
 <meta property="og:title" content="{{ info.groom_name_kr }} ♥ {{ info.bride_name_kr }} 결혼합니다">
 <meta property="og:description" content="{{ info.wedding_date_display }} · {{ info.venue_name }}">
-<meta property="og:image" content="{{ url_for('static', filename='img/og-cover.svg') }}">
+<meta property="og:image" content="{{ url_for('og_cover') }}">
 <meta property="og:type" content="website">
 
 <!-- PWA -->
@@ -26,21 +26,31 @@
 </head>
 <body>
 
+<canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
 <div class="card">
 
   <!-- ================= HERO ================= -->
-  <section class="hero">
-    <div class="hero__ornament" aria-hidden="true">✦</div>
-    <p class="hero__eyebrow">WE ARE GETTING MARRIED</p>
-    <h1 class="hero__names">
-      <span>{{ info.groom_name_kr }}</span>
-      <span class="hero__amp">&amp;</span>
-      <span>{{ info.bride_name_kr }}</span>
-    </h1>
-    <p class="hero__names-en">{{ info.groom_name_en }} &nbsp;&amp;&nbsp; {{ info.bride_name_en }}</p>
-    <div class="hero__divider"></div>
-    <p class="hero__date">{{ info.wedding_date_display }}</p>
-    <p class="hero__venue">{{ info.venue_name }}</p>
+  <section class="hero{% if info.hero_photo %} hero--photo{% endif %}">
+    {% if info.hero_photo %}
+    <div class="hero__photo-wrap">
+      <img class="hero__photo" src="{{ url_for('static', filename='img/' ~ info.hero_photo) }}" alt="{{ info.groom_name_kr }}, {{ info.bride_name_kr }} 웨딩 사진">
+      <div class="hero__scrim"></div>
+    </div>
+    {% endif %}
+    <div class="hero__content">
+      <div class="hero__ornament" aria-hidden="true">✦</div>
+      <p class="hero__eyebrow">WE ARE GETTING MARRIED</p>
+      <h1 class="hero__names">
+        <span>{{ info.groom_name_kr }}</span>
+        <span class="hero__amp">&amp;</span>
+        <span>{{ info.bride_name_kr }}</span>
+      </h1>
+      <p class="hero__names-en">{{ info.groom_name_en }} &nbsp;&amp;&nbsp; {{ info.bride_name_en }}</p>
+      <div class="hero__divider"></div>
+      <p class="hero__date">{{ info.wedding_date_display }}</p>
+      <p class="hero__venue">{{ info.venue_name }}</p>
+    </div>
   </section>
 
   <!-- ================= 인사말 ================= -->
@@ -102,7 +112,7 @@
     <div class="map-frame">
       <iframe
         title="예식장 위치 지도"
-        src="https://maps.google.com/maps?q={{ info.map_lat }},{{ info.map_lng }}&z=16&output=embed"
+        src="https://maps.google.com/maps?q={{ (info.venue_name ~ ' ' ~ info.venue_address) | urlencode }}&z=16&output=embed"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade">
       </iframe>
