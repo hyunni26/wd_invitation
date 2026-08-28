@@ -97,7 +97,12 @@ body {
   );
 }
 
-.hero--split .hero__eyebrow,
+.hero--split .hero__eyebrow{
+   color: #fffaf8;
+   text-shadow: 0 2px 12px rgba(20, 12, 14, 0.35);
+   font-family: 'Montserrat';
+   
+}
 .hero--split .hero__names,
 .hero--split .hero__date {
   color: #fffaf8;
