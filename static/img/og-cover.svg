@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="og" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#f3dde4"/>
+      <stop offset="100%" stop-color="#ece3f2"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#og)"/>
+  <text x="50%" y="48%" text-anchor="middle" font-family="Georgia, serif" font-size="64" fill="#8f4a5e">백대열 &amp; 정수현</text>
+  <text x="50%" y="60%" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#b3667c">저희 결혼합니다</text>
+</svg>
