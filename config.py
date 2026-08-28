@@ -6,20 +6,20 @@
 
 WEDDING_INFO = {
     # ── 기본 정보 ─────────────────────────────
-    "groom_name_kr": "홍길동",
-    "groom_name_en": "Hong Gil Dong",
-    "bride_name_kr": "김영희",
-    "bride_name_en": "Kim Younghee",
+    "groom_name_kr": "백대열",
+    "groom_name_en": "Baek Daeyeol",
+    "bride_name_kr": "정수현",
+    "bride_name_en": "Chung Suhyun",
 
     # ── 예식 일시 ─────────────────────────────
-    "wedding_date": "2027-05-08",       # YYYY-MM-DD
-    "wedding_time": "13:00",            # 24시간제 HH:MM
-    "wedding_date_display": "2027년 5월 8일 토요일 오후 1시",
+    "wedding_date": "2027-03-06",       # YYYY-MM-DD
+    "wedding_time": "14:00",            # 24시간제 HH:MM
+    "wedding_date_display": "2027년 3월 6일 토요일 오후 2시",
 
     # ── 예식 장소 ─────────────────────────────
-    "venue_name": "○○컨벤션 웨딩홀 3층 그랜드홀",
-    "venue_address": "서울특별시 ○○구 ○○로 123",
-    "venue_tel": "02-1234-5678",
+    "venue_name": "MJ컨벤션 웨딩홀 3층 그랜드홀",
+    "venue_address": "경기 부천시 소사구 경인로 386",
+    "venue_tel": "032-347-5500",
 
     # ── 인사말 ────────────────────────────────
     "greeting_title": "저희 결혼합니다",
@@ -31,28 +31,28 @@ WEDDING_INFO = {
     ),
 
     # ── 혼주 정보 ─────────────────────────────
-    "groom_father": "홍○○",
+    "groom_father": "백계철",
     "groom_mother": "이○○",
-    "bride_father": "김○○",
-    "bride_mother": "박○○",
+    "bride_father": "정상택",
+    "bride_mother": "신동숙",
 
     # ── 오시는 길 ─────────────────────────────
-    "map_lat": 37.5665,
-    "map_lng": 126.9780,
-    "transit_subway": "지하철 2호선 ○○역 3번 출구에서 도보 5분",
-    "transit_bus": "간선버스 000, 지선버스 0000 · ○○정류장 하차",
-    "transit_car": "내비게이션에 '○○컨벤션'으로 검색",
-    "parking_info": "건물 지하 1~3층 주차 가능 (하객 3시간 무료)",
+    "map_lat": 37.5011,
+    "map_lng": 126.7675,
+    "transit_subway": "지하철 1호선/서해선 소사역 1번 출구에서 도보 5분",
+    "transit_bus": "간선버스 60-1, 99, 20번, 지선버스 19, 53, 83, 88번 · 소사어울마당삼거리·MJ컨벤션 정류소 하차",
+    "transit_car": "내비게이션에 'MJ컨벤션'으로 검색",
+    "parking_info": "500대 규모 전용 주차타워 주차가능 (하객 2시간 무료)",
 
     # ── 마음 전하실 곳 (계좌번호) ────────────────
     "accounts": {
         "groom_side": [
-            {"role": "신랑", "name": "홍길동", "bank": "○○은행", "number": "000-0000-0000-00"},
-            {"role": "신랑 父", "name": "홍○○", "bank": "○○은행", "number": "000-0000-0000-00"},
+            {"role": "신랑", "name": "백대열", "bank": "하나은행", "number": "000-0000-0000-00"},
+            {"role": "신랑 父", "name": "백계철", "bank": "우체국", "number": "000-0000-0000-00"},
         ],
         "bride_side": [
-            {"role": "신부", "name": "김영희", "bank": "○○은행", "number": "000-0000-0000-00"},
-            {"role": "신부 父", "name": "김○○", "bank": "○○은행", "number": "000-0000-0000-00"},
+            {"role": "신부", "name": "정수현", "bank": "우리은행", "number": "000-0000-0000-00"},
+            {"role": "신부 母", "name": "신동숙", "bank": "국민은행", "number": "000-0000-0000-00"},
         ],
     },
 
