@@ -23,7 +23,7 @@ WEDDING_INFO = {
     "wedding_date_display": "2027년 3월 6일 토요일 오후 2시",
 
     # ── 예식 장소 ─────────────────────────────
-    "venue_name": "MJ컨벤션 웨딩홀 3층 그랜드홀",
+    "venue_name": "MJ컨벤션 웨딩홀 3층 다이너스티홀",
     "venue_address": "경기 부천시 소사구 경인로 386",
     "venue_tel": "032-347-5500",
 
@@ -38,7 +38,7 @@ WEDDING_INFO = {
 
     # ── 혼주 정보 ─────────────────────────────
     "groom_father": "백계철",
-    "groom_mother": "이○○",
+    "groom_mother": "이수경",
     "bride_father": "정상택",
     "bride_mother": "신동숙",
 
