@@ -1,0 +1,26 @@
+{
+  "name": "{{ info.groom_name_kr }} ♥ {{ info.bride_name_kr }} 결혼합니다",
+  "short_name": "저희 결혼합니다",
+  "description": "{{ info.groom_name_kr }}, {{ info.bride_name_kr }}의 모바일 청첩장",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f8f1ee",
+  "theme_color": "#f3dde4",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "/static/icons/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/static/icons/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
