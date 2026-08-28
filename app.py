@@ -46,6 +46,13 @@ def manifest():
     return app.response_class(body, mimetype="application/manifest+json")
 
 
+@app.route("/og-cover.svg")
+def og_cover():
+    # 카카오톡 등 링크 공유 미리보기 이미지. config.py의 이름이 바뀌면 자동으로 반영됨
+    body = render_template("og-cover.svg", info=WEDDING_INFO)
+    return app.response_class(body, mimetype="image/svg+xml")
+
+
 @app.route("/sw.js")
 def service_worker():
     response = send_from_directory("static/js", "sw.js", mimetype="application/javascript")
