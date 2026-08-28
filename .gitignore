@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# 환경변수 (절대 커밋 금지)
+.env
+
+# 확장용 SQLite DB (S3에서 받아오는 파일 - 로컬에만 존재해야 함)
+data/*.db
+data/*.sqlite
+
+# OS / 에디터
+.DS_Store
+.vscode/
+.idea/
