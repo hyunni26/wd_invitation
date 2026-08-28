@@ -110,12 +110,21 @@
     <button class="btn-copy" data-copy="{{ info.venue_address }}">주소 복사</button>
 
     <div class="map-frame">
+      {% if info.map_lat and info.map_lng %}
+      <iframe
+        title="예식장 위치 지도"
+        src="https://maps.google.com/maps?q={{ info.map_lat }},{{ info.map_lng }}&z=16&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+      {% else %}
       <iframe
         title="예식장 위치 지도"
         src="https://maps.google.com/maps?q={{ (info.venue_name ~ ' ' ~ info.venue_address) | urlencode }}&z=16&output=embed"
         loading="lazy"
         referrerpolicy="no-referrer-when-downgrade">
       </iframe>
+      {% endif %}
     </div>
 
     <div class="transit">
