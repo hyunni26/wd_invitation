@@ -31,11 +31,10 @@
 <div class="card">
 
   <!-- ================= HERO ================= -->
-  <section class="hero{% if info.hero_photo %} hero--photo{% endif %}">
+  <section class="hero{% if info.hero_photo %} hero--split{% endif %}">
     {% if info.hero_photo %}
-    <div class="hero__photo-wrap">
+    <div class="hero__photo-frame">
       <img class="hero__photo" src="{{ url_for('static', filename='img/' ~ info.hero_photo) }}" alt="{{ info.groom_name_kr }}, {{ info.bride_name_kr }} 웨딩 사진">
-      <div class="hero__scrim"></div>
     </div>
     {% endif %}
     <div class="hero__content">
@@ -43,10 +42,9 @@
       <p class="hero__eyebrow">WE ARE GETTING MARRIED</p>
       <h1 class="hero__names">
         <span>{{ info.groom_name_kr }}</span>
-        <span class="hero__amp">&amp;</span>
+        <span class="hero__amp" aria-hidden="true">♥</span>
         <span>{{ info.bride_name_kr }}</span>
       </h1>
-      <p class="hero__names-en">{{ info.groom_name_en }} &nbsp;&amp;&nbsp; {{ info.bride_name_en }}</p>
       <div class="hero__divider"></div>
       <p class="hero__date">{{ info.wedding_date_display }}</p>
       <p class="hero__venue">{{ info.venue_name }}</p>
