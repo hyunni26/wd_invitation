@@ -1,0 +1,16 @@
+# Render Blueprint - Render 대시보드에서 "New +" -> "Blueprint"로
+# 이 저장소를 선택하면 아래 설정이 자동으로 적용됩니다.
+# (수동으로 Web Service를 만들어도 되며, 그 경우 이 파일은 무시해도 됩니다.)
+
+services:
+  - type: web
+    name: wedding-invitation
+    env: python
+    plan: free
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_DEBUG
+        value: 0
+      - key: PYTHON_VERSION
+        value: 3.11.9
