@@ -15,10 +15,10 @@
   --color-ink-soft: #8a7a7e;
   --color-line: #ecdde0;
 
-  --font-serif-en: 'Cormorant Garamond', 'Noto Serif KR', serif;
+  --font-serif-en: 'Great Vibes', cursive;
   --font-script: 'Great Vibes', cursive;
-  --font-serif-kr: 'Noto Serif KR', serif;
-  --font-sans-kr: 'Noto Sans KR', sans-serif;
+  --font-serif-kr: 'Gowun Batang', serif;
+  --font-sans-kr: 'Gowun Batang', serif; /* 전체 본문도 고운바탕으로 변경 */
 
   --shadow-soft: 0 12px 32px rgba(179, 102, 124, 0.12);
 }
