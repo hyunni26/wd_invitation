@@ -150,6 +150,106 @@
     });
   }
 
+  /* ---------- 페이지 진입 컨페티 애니메이션 ---------- */
+  function initConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    if (!canvas) return;
+
+    // 모션에 민감한 사용자는 애니메이션을 건너뜀
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      canvas.remove();
+      return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    const COLORS = ['#f3dde4', '#e8b9c4', '#ece3f2', '#d9c6ea', '#c7a05f', '#b3667c', '#fffaf8'];
+    const PIECE_COUNT = 140;
+    const DURATION = 3200; // ms
+    const GRAVITY = 0.16;
+
+    let width, height, dpr;
+    function resize() {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    resize();
+
+    // 화면 상단 중앙 부근에서 좌우로 퍼지며 터지는 폭죽 느낌
+    const originX = width / 2;
+    const originY = height * 0.32;
+
+    function makePiece() {
+      const angle = Math.random() * Math.PI * 2;
+      const speed = 4 + Math.random() * 9;
+      return {
+        x: originX,
+        y: originY,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed - 2, // 살짝 위로 솟구치는 초기 힘
+        size: 5 + Math.random() * 5,
+        color: COLORS[(Math.random() * COLORS.length) | 0],
+        rotation: Math.random() * Math.PI,
+        rotationSpeed: (Math.random() - 0.5) * 0.3,
+        shape: Math.random() > 0.5 ? 'rect' : 'circle',
+        drag: 0.985 + Math.random() * 0.01,
+      };
+    }
+
+    const pieces = [];
+    for (let i = 0; i < PIECE_COUNT; i++) pieces.push(makePiece());
+
+    const start = performance.now();
+
+    function frame(now) {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / DURATION, 1);
+
+      ctx.clearRect(0, 0, width, height);
+
+      pieces.forEach(function (p) {
+        p.vx *= p.drag;
+        p.vy = p.vy * p.drag + GRAVITY;
+        p.x += p.vx;
+        p.y += p.vy;
+        p.rotation += p.rotationSpeed;
+
+        const fadeStart = 0.65;
+        const opacity = progress < fadeStart ? 1 : Math.max(0, 1 - (progress - fadeStart) / (1 - fadeStart));
+
+        ctx.save();
+        ctx.globalAlpha = opacity;
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.fillStyle = p.color;
+
+        if (p.shape === 'rect') {
+          ctx.fillRect(-p.size / 2, -p.size / 4, p.size, p.size / 2);
+        } else {
+          ctx.beginPath();
+          ctx.arc(0, 0, p.size / 2.4, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      });
+
+      if (progress < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        ctx.clearRect(0, 0, width, height);
+        canvas.remove();
+      }
+    }
+
+    requestAnimationFrame(frame);
+    window.addEventListener('resize', resize);
+  }
+
   /* ---------- Service Worker 등록 (PWA) ---------- */
   function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
@@ -166,6 +266,7 @@
     initCountdown();
     initCopyButtons();
     initGallery();
+    initConfetti();
     registerServiceWorker();
   });
 })();
