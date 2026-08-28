@@ -131,6 +131,7 @@
       <a class="nav-links__item" href="tmap://route?goalname={{ info.venue_name | urlencode }}&goalx={{ info.map_lng }}&goaly={{ info.map_lat }}">티맵</a>
       <a class="nav-links__item" href="nmap://route/car?dlat={{ info.map_lat }}&dlng={{ info.map_lng }}&dname={{ info.venue_name | urlencode }}&appname=invitation.wedding">네이버지도</a>
     </div>
+    <p class="nav-links__hint">원하시는 앱을 누르시면 자동으로 연결 됩니다.</p>
     {% endif %}
 
     <div class="transit">
@@ -139,7 +140,6 @@
       <div class="transit__row"><span class="transit__icon">🚗</span><p>{{ info.transit_car }}</p></div>
       <div class="transit__row"><span class="transit__icon">🅿️</span><p>{{ info.parking_info }}</p></div>
     </div>
-    <p class="nav-links__hint">원하시는 앱을 누르시면 자동으로 연결 됩니다.</p>
   </section>
 
   <!-- ================= 마음 전하실 곳 ================= -->
