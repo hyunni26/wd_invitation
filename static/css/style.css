@@ -57,6 +57,64 @@ body {
     radial-gradient(120% 90% at 50% -10%, var(--color-blush) 0%, transparent 60%),
     linear-gradient(180deg, #fdf6f4 0%, var(--color-card) 100%);
   position: relative;
+  overflow: hidden;
+}
+
+/* 상단 대문 사진이 있을 때: 사진 위에 그라데이션 스크림을 깔아
+   어떤 사진이 들어와도 텍스트 가독성이 확보되도록 함 */
+.hero--photo {
+  padding: 0;
+  min-height: 78vw;
+  max-height: 620px;
+  display: flex;
+  align-items: flex-end;
+  background: var(--color-card);
+}
+
+.hero__photo-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero__photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero__scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(35, 21, 26, 0.45) 0%,
+    rgba(35, 21, 26, 0.16) 34%,
+    rgba(253, 246, 244, 0.62) 64%,
+    var(--color-card) 92%
+  );
+}
+
+.hero__content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+}
+
+.hero--photo .hero__content {
+  padding: 72px 32px 40px;
+}
+
+.hero--photo .hero__eyebrow,
+.hero--photo .hero__names,
+.hero--photo .hero__names-en {
+  color: #fffaf8;
+  text-shadow: 0 2px 14px rgba(20, 12, 14, 0.35);
+}
+
+.hero--photo .hero__ornament {
+  color: #f6e4c4;
 }
 
 .hero__ornament {
@@ -463,6 +521,16 @@ body {
   line-height: 1.8;
   color: var(--color-ink-soft);
   margin: 0;
+}
+
+/* ---------- 컨페티 (페이지 진입 애니메이션) ---------- */
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2000;
 }
 
 /* ---------- 라이트박스 ---------- */
