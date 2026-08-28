@@ -9,7 +9,7 @@ WEDDING_INFO = {
     # ── 상단 대문 사진 (이름/날짜/장소 뒤 배경) ─────
     # 실제 사진 준비되면 static/img/ 에 넣고 파일명만 바꿔주세요 (jpg/png/webp 다 가능).
     # None으로 두면 사진 없이 원래의 파스텔 그라데이션 배경으로 표시됩니다.
-    "hero_photo": "hero-placeholder.svg",
+    "hero_photo": "main_photo.svg",
 
     # ── 기본 정보 ─────────────────────────────
     "groom_name_kr": "백대열",
