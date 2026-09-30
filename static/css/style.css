@@ -101,7 +101,7 @@ body {
    color: #fffaf8;
    text-shadow: 0 2px 12px rgba(20, 12, 14, 0.35);
    font-family: 'Montserrat';
-   
+
 }
 .hero--split .hero__names,
 .hero--split .hero__date {
@@ -545,6 +545,102 @@ body {
   line-height: 1.8;
   color: var(--color-ink-soft);
   margin: 0;
+}
+
+/* ---------- 첫화면 (인트로) ---------- */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(120% 90% at 50% 15%, var(--color-blush) 0%, transparent 55%),
+    linear-gradient(180deg, #fdf6f4 0%, var(--color-lavender) 100%);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.intro.is-hiding {
+  opacity: 0;
+  transform: scale(1.04);
+  pointer-events: none;
+}
+
+.intro.is-hidden {
+  display: none;
+}
+
+.intro__inner {
+  text-align: center;
+  padding: 0 32px;
+  opacity: 0;
+  transform: translateY(14px);
+  animation: intro-in 1s ease forwards 0.15s;
+}
+
+@keyframes intro-in {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.intro__ornament {
+  color: var(--color-gold);
+  font-size: 20px;
+  letter-spacing: 4px;
+  margin: 0 0 16px;
+}
+
+.intro__eyebrow {
+  font-family: var(--font-serif-en);
+  letter-spacing: 3px;
+  font-size: 12px;
+  color: var(--color-rose);
+  margin: 0 0 18px;
+  font-weight: 500;
+}
+
+.intro__names {
+  font-family: var(--font-serif-kr);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.5;
+  margin: 0 0 14px;
+  color: var(--color-ink);
+}
+
+.intro__amp {
+  display: inline-block;
+  margin: 0 10px;
+  font-size: 18px;
+  color: var(--color-gold);
+}
+
+.intro__phrase {
+  font-size: 14px;
+  color: var(--color-ink-soft);
+  margin: 0 0 22px;
+  letter-spacing: 0.5px;
+}
+
+.intro__divider {
+  width: 36px;
+  height: 1px;
+  background: var(--color-gold);
+  margin: 0 auto 18px;
+  opacity: 0.6;
+}
+
+.intro__date {
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  color: var(--color-rose-deep);
+  margin: 0;
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro { transition: none; }
+  .intro__inner { animation: none; opacity: 1; transform: none; }
 }
 
 /* ---------- 컨페티 (페이지 진입 애니메이션) ---------- */
