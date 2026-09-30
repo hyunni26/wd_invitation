@@ -30,11 +30,10 @@
 <div class="intro" id="intro">
   <div class="intro__inner">
     <p class="intro__ornament" aria-hidden="true">✦</p>
-    <p class="intro__eyebrow">Happy Wedding Day</p>
     <h1 class="intro__names">
-      <span>{{ info.groom_name_kr }}</span>
+      <span>{{ info.groom_name_kr[1:] }}</span>
       <span class="intro__amp" aria-hidden="true">♥</span>
-      <span>{{ info.bride_name_kr }}</span>
+      <span>{{ info.bride_name_kr[1:] }}</span>
     </h1>
     <p class="intro__phrase">저희 결혼합니다</p>
     <div class="intro__divider"></div>
@@ -56,10 +55,10 @@
     <div class="hero__content">
       <div class="hero__row">
         <div class="hero__bigdate" aria-hidden="true">
-          <span class="hero__bigdate-num">{{ info.wedding_date[2:4] }}</span>
-          <span class="hero__bigdate-num">{{ info.wedding_date[5:7] }}</span>
+          <span class="hero__bigdate-num">{{ info.wedding_date[2:4] }}.</span>
+          <span class="hero__bigdate-num">{{ info.wedding_date[5:7] }}.</span>
           <span class="hero__bigdate-num">{{ info.wedding_date[8:10] }}</span>
-          <span class="hero__bigdate-dow" id="hero-dow" data-date="{{ info.wedding_date }}"></span>
+          <span class="hero__bigdate-dow" id="hero-dow" data-date="{{ info.wedding_date }}" data-time="{{ info.wedding_time }}"></span>
         </div>
         <div class="hero__info">
           <div class="hero__ornament" aria-hidden="true">✦</div>
@@ -70,7 +69,6 @@
             <span>{{ info.bride_name_kr }}</span>
           </h1>
           <div class="hero__divider"></div>
-          <p class="hero__date">{{ info.wedding_date_display }}</p>
           <p class="hero__venue">{{ info.venue_name }}</p>
         </div>
       </div>
