@@ -88,13 +88,37 @@ body {
   position: relative;
   z-index: 2;
   margin-top: -30vh;
-  padding: 70px 32px 34px;
+  padding: 60px 26px calc(30px + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(
     180deg,
     rgba(35, 21, 26, 0) 0%,
     rgba(35, 21, 26, 0.5) 38%,
     rgba(35, 21, 26, 0.66) 100%
   );
+}
+
+/* 사진 위에서는 큰 날짜(왼쪽) / 이름·나머지 정보(오른쪽)로 나눠 배치.
+   날짜는 위쪽으로, 이름 쪽은 아래쪽으로 정렬해 참고 이미지 느낌으로 */
+.hero--split .hero__row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.hero--split .hero__bigdate {
+  align-self: flex-start;
+  margin: 0;
+}
+
+.hero--split .hero__info {
+  flex: 1;
+  min-width: 0;
+  text-align: right;
+}
+
+.hero--split .hero__info .hero__divider {
+  margin: 14px 0 14px auto;
 }
 
 .hero--split .hero__eyebrow{
