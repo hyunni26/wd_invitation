@@ -250,6 +250,37 @@
     window.addEventListener('resize', resize);
   }
 
+  /* ---------- 첫화면(인트로) → 초대장 본문 자동 전환 ---------- */
+  function initIntro() {
+    const intro = document.getElementById('intro');
+    if (!intro) {
+      // 인트로 요소가 없는 예전 캐시 페이지 등 예외 상황 대비
+      initConfetti();
+      return;
+    }
+
+    const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function finish() {
+      intro.classList.add('is-hidden');
+      document.body.style.overflow = '';
+      initConfetti();
+    }
+
+    if (reduceMotion) {
+      // 모션 최소화 사용자: 오래 붙잡지 않고 바로 넘어감 (컨페티도 스킵됨)
+      setTimeout(finish, 400);
+      return;
+    }
+
+    document.body.style.overflow = 'hidden';
+
+    setTimeout(function () {
+      intro.classList.add('is-hiding');
+      setTimeout(finish, 800); // CSS transition(0.8s)과 동일하게 맞춤
+    }, 2600);
+  }
+
   /* ---------- Service Worker 등록 (PWA) ---------- */
   function registerServiceWorker() {
     if ('serviceWorker' in navigator) {
@@ -266,7 +297,7 @@
     initCountdown();
     initCopyButtons();
     initGallery();
-    initConfetti();
+    initIntro(); // 인트로가 끝나면 그 안에서 initConfetti()를 호출함
     registerServiceWorker();
   });
 })();
