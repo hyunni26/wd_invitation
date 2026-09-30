@@ -652,16 +652,6 @@ body {
   animation-delay: 0.1s;
 }
 
-.intro__eyebrow {
-  font-family: var(--font-serif-en);
-  letter-spacing: 3px;
-  font-size: 12px;
-  color: var(--color-rose);
-  margin: 0 0 18px;
-  font-weight: 500;
-  animation-delay: 0.4s;
-}
-
 .intro__names {
   font-family: var(--font-serif-kr);
   font-weight: 500;
@@ -669,7 +659,7 @@ body {
   line-height: 1.5;
   margin: 0 0 14px;
   color: var(--color-ink);
-  animation-delay: 0.7s;
+  animation-delay: 0.4s;
 }
 
 .intro__amp {
@@ -680,11 +670,14 @@ body {
 }
 
 .intro__phrase {
-  font-size: 14px;
-  color: var(--color-ink-soft);
+  font-family: var(--font-serif-kr);
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--color-ink);
   margin: 0 0 22px;
   letter-spacing: 0.5px;
-  animation-delay: 1s;
+  animation-delay: 0.7s;
 }
 
 .intro__divider {
@@ -692,7 +685,7 @@ body {
   height: 1px;
   background: var(--color-gold);
   margin: 0 auto 18px;
-  animation-delay: 1.3s;
+  animation-delay: 1s;
 }
 
 .intro__date {
@@ -701,7 +694,7 @@ body {
   color: var(--color-rose-deep);
   margin: 0;
   font-weight: 600;
-  animation-delay: 1.5s;
+  animation-delay: 1.3s;
 }
 
 @media (prefers-reduced-motion: reduce) {
