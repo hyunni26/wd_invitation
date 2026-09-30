@@ -26,6 +26,22 @@
 </head>
 <body>
 
+<!-- ================= 첫화면 (인트로) ================= -->
+<div class="intro" id="intro">
+  <div class="intro__inner">
+    <p class="intro__ornament" aria-hidden="true">✦</p>
+    <p class="intro__eyebrow">Happy Wedding Day</p>
+    <h1 class="intro__names">
+      <span>{{ info.groom_name_kr }}</span>
+      <span class="intro__amp" aria-hidden="true">♥</span>
+      <span>{{ info.bride_name_kr }}</span>
+    </h1>
+    <p class="intro__phrase">저희 결혼합니다</p>
+    <div class="intro__divider"></div>
+    <p class="intro__date">{{ info.wedding_date_display }}</p>
+  </div>
+</div>
+
 <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
 <div class="card">
