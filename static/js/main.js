@@ -39,6 +39,17 @@
     el.innerHTML = html;
   }
 
+  /* ---------- 히어로 큰 날짜의 요일(SAT 등) 채우기 ---------- */
+  function initHeroDate() {
+    const el = document.getElementById('hero-dow');
+    if (!el) return;
+
+    const dateStr = el.dataset.date; // YYYY-MM-DD
+    const [y, m, d] = dateStr.split('-').map(Number);
+    const dowNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+    el.textContent = dowNames[new Date(y, m - 1, d).getDay()];
+  }
+
   /* ---------- 카운트다운 ---------- */
   function initCountdown() {
     const el = document.getElementById('countdown');
@@ -278,7 +289,7 @@
     setTimeout(function () {
       intro.classList.add('is-hiding');
       setTimeout(finish, 800); // CSS transition(0.8s)과 동일하게 맞춤
-    }, 2600);
+    }, 3000); // 한줄씩 뜨는 연출(마지막 줄 약 2.2s)이 다 보이도록 여유를 둠
   }
 
   /* ---------- Service Worker 등록 (PWA) ---------- */
@@ -294,6 +305,7 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     renderCalendar();
+    initHeroDate();
     initCountdown();
     initCopyButtons();
     initGallery();
