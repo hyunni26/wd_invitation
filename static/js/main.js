@@ -39,15 +39,24 @@
     el.innerHTML = html;
   }
 
-  /* ---------- 히어로 큰 날짜의 요일(SAT 등) 채우기 ---------- */
+  /* ---------- 히어로 큰 날짜 아래 "토 2시" 채우기 ---------- */
   function initHeroDate() {
     const el = document.getElementById('hero-dow');
     if (!el) return;
 
     const dateStr = el.dataset.date; // YYYY-MM-DD
+    const timeStr = el.dataset.time; // HH:MM
     const [y, m, d] = dateStr.split('-').map(Number);
-    const dowNames = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-    el.textContent = dowNames[new Date(y, m - 1, d).getDay()];
+    const dowNames = ['일', '월', '화', '수', '목', '금', '토'];
+    let text = dowNames[new Date(y, m - 1, d).getDay()];
+
+    if (timeStr) {
+      const hour = Number(timeStr.split(':')[0]);
+      const hour12 = hour % 12 === 0 ? 12 : hour % 12;
+      text += ' ' + hour12 + '시';
+    }
+
+    el.textContent = text;
   }
 
   /* ---------- 카운트다운 ---------- */
@@ -289,7 +298,7 @@
     setTimeout(function () {
       intro.classList.add('is-hiding');
       setTimeout(finish, 800); // CSS transition(0.8s)과 동일하게 맞춤
-    }, 3000); // 한줄씩 뜨는 연출(마지막 줄 약 2.2s)이 다 보이도록 여유를 둠
+    }, 6000); // 너무 빨리 넘어간다는 피드백으로 대기 시간을 2배로 늘림
   }
 
   /* ---------- Service Worker 등록 (PWA) ---------- */
