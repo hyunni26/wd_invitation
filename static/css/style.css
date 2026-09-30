@@ -135,6 +135,40 @@ body {
   font-weight: 500;
 }
 
+.hero__bigdate {
+  line-height: 0.92;
+  margin: 0 0 20px;
+}
+
+.hero__bigdate-num {
+  display: block;
+  font-family: var(--font-serif-kr);
+  font-weight: 700;
+  font-size: 44px;
+  letter-spacing: 1px;
+  color: var(--color-rose-deep);
+}
+
+.hero__bigdate-dow {
+  display: block;
+  margin-top: 10px;
+  font-family: var(--font-serif-en);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  color: var(--color-gold);
+}
+
+.hero--split .hero__bigdate-num {
+  color: #fffaf8;
+  text-shadow: 0 2px 12px rgba(20, 12, 14, 0.35);
+}
+
+.hero--split .hero__bigdate-dow {
+  color: #f6e4c4;
+  text-shadow: 0 2px 10px rgba(20, 12, 14, 0.3);
+}
+
 .hero__names {
   font-family: var(--font-serif-kr);
   font-weight: 500;
@@ -574,12 +608,15 @@ body {
 .intro__inner {
   text-align: center;
   padding: 0 32px;
-  opacity: 0;
-  transform: translateY(14px);
-  animation: intro-in 1s ease forwards 0.15s;
 }
 
-@keyframes intro-in {
+.intro__inner > * {
+  opacity: 0;
+  transform: translateY(12px);
+  animation: intro-line-in 0.7s ease forwards;
+}
+
+@keyframes intro-line-in {
   to { opacity: 1; transform: translateY(0); }
 }
 
@@ -588,6 +625,7 @@ body {
   font-size: 20px;
   letter-spacing: 4px;
   margin: 0 0 16px;
+  animation-delay: 0.1s;
 }
 
 .intro__eyebrow {
@@ -597,6 +635,7 @@ body {
   color: var(--color-rose);
   margin: 0 0 18px;
   font-weight: 500;
+  animation-delay: 0.4s;
 }
 
 .intro__names {
@@ -606,6 +645,7 @@ body {
   line-height: 1.5;
   margin: 0 0 14px;
   color: var(--color-ink);
+  animation-delay: 0.7s;
 }
 
 .intro__amp {
@@ -620,6 +660,7 @@ body {
   color: var(--color-ink-soft);
   margin: 0 0 22px;
   letter-spacing: 0.5px;
+  animation-delay: 1s;
 }
 
 .intro__divider {
@@ -627,7 +668,7 @@ body {
   height: 1px;
   background: var(--color-gold);
   margin: 0 auto 18px;
-  opacity: 0.6;
+  animation-delay: 1.3s;
 }
 
 .intro__date {
@@ -636,11 +677,12 @@ body {
   color: var(--color-rose-deep);
   margin: 0;
   font-weight: 600;
+  animation-delay: 1.5s;
 }
 
 @media (prefers-reduced-motion: reduce) {
   .intro { transition: none; }
-  .intro__inner { animation: none; opacity: 1; transform: none; }
+  .intro__inner > * { animation: none; opacity: 1; transform: none; }
 }
 
 /* ---------- 컨페티 (페이지 진입 애니메이션) ---------- */
