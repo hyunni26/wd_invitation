@@ -20,7 +20,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Great+Vibes&family=Gaegu:wght@400;700&display=swap" rel="stylesheet">
 
 <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
@@ -29,7 +29,6 @@
 <!-- ================= 첫화면 (인트로) ================= -->
 <div class="intro" id="intro">
   <div class="intro__inner">
-    <p class="intro__ornament" aria-hidden="true">✦</p>
     <h1 class="intro__names">
       <span>{{ info.groom_name_kr[1:] }}</span>
       <span class="intro__amp" aria-hidden="true">♥</span>
@@ -53,16 +52,12 @@
     </div>
     {% endif %}
     <div class="hero__content">
+      <div class="hero__meta">
+        <p class="hero__meta-date" id="hero-meta-date" data-date="{{ info.wedding_date }}" data-time="{{ info.wedding_time }}">{{ info.wedding_date[2:4] }}.{{ info.wedding_date[5:7] }}.{{ info.wedding_date[8:10] }}</p>
+        <p class="hero__eyebrow">Happy Wedding Day</p>
+      </div>
       <div class="hero__row">
-        <div class="hero__bigdate" aria-hidden="true">
-          <span class="hero__bigdate-num">{{ info.wedding_date[2:4] }}.</span>
-          <span class="hero__bigdate-num">{{ info.wedding_date[5:7] }}.</span>
-          <span class="hero__bigdate-num">{{ info.wedding_date[8:10] }}</span>
-          <span class="hero__bigdate-dow" id="hero-dow" data-date="{{ info.wedding_date }}" data-time="{{ info.wedding_time }}"></span>
-        </div>
         <div class="hero__info">
-          <div class="hero__ornament" aria-hidden="true">✦</div>
-          <p class="hero__eyebrow">Happy Wedding Day</p>
           <h1 class="hero__names">
             <span>{{ info.groom_name_kr }}</span>
             <span class="hero__amp" aria-hidden="true">♥</span>
@@ -78,6 +73,7 @@
   <!-- ================= 인사말 ================= -->
   <section class="section greeting">
     <h2 class="section__title">{{ info.greeting_title }}</h2>
+    <p class="greeting__date">{{ info.wedding_date_display }}</p>
     <p class="greeting__message">{{ info.greeting_message }}</p>
 
     <div class="family">
