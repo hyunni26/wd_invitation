@@ -97,18 +97,50 @@ body {
   );
 }
 
-/* 사진 위에서는 큰 날짜(왼쪽) / 이름·나머지 정보(오른쪽)로 나눠 배치.
-   날짜는 위쪽으로, 이름 쪽은 아래쪽으로 정렬해 참고 이미지 느낌으로 */
-.hero--split .hero__row {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 14px;
+/* 큰 날짜(귀여운 손글씨 느낌) + 그 아래 Happy Wedding Day.
+   사진 위(hero--split)에서는 맨 위 왼쪽 정렬, 사진이 없을 때는 기존처럼 가운데 정렬 유지 */
+.hero__meta {
+  margin: 0 0 20px;
 }
 
-.hero--split .hero__bigdate {
-  align-self: flex-start;
+.hero--split .hero__meta {
+  text-align: left;
+  margin: 0 0 26px;
+}
+
+.hero__meta-date {
+  font-family: 'Gaegu', cursive;
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 1;
+  letter-spacing: 0.5px;
+  margin: 0 0 8px;
+  color: var(--color-rose-deep);
+}
+
+.hero__eyebrow {
+  font-family: var(--font-serif-en);
+  letter-spacing: 3px;
+  font-size: 11px;
+  color: var(--color-rose);
   margin: 0;
+  font-weight: 500;
+}
+
+.hero--split .hero__meta-date {
+  color: #fffaf8;
+  text-shadow: 0 2px 12px rgba(20, 12, 14, 0.35);
+}
+
+.hero--split .hero__eyebrow {
+  color: #fffaf8;
+  text-shadow: 0 2px 12px rgba(20, 12, 14, 0.35);
+}
+
+/* 이름·구분선·장소는 오른쪽 정렬 유지 */
+.hero--split .hero__row {
+  display: flex;
+  justify-content: flex-end;
 }
 
 .hero--split .hero__info {
@@ -121,12 +153,6 @@ body {
   margin: 14px 0 14px auto;
 }
 
-.hero--split .hero__eyebrow{
-   color: #fffaf8;
-   text-shadow: 0 2px 12px rgba(20, 12, 14, 0.35);
-   font-family: 'Montserrat';
-
-}
 .hero--split .hero__names,
 .hero--split .hero__date {
   color: #fffaf8;
@@ -135,61 +161,6 @@ body {
 
 .hero--split .hero__venue {
   color: #f3e6e2;
-  text-shadow: 0 2px 10px rgba(20, 12, 14, 0.3);
-}
-
-.hero--split .hero__ornament {
-  color: #f6e4c4;
-  text-shadow: 0 2px 10px rgba(20, 12, 14, 0.3);
-}
-
-.hero__ornament {
-  color: var(--color-gold);
-  font-size: 18px;
-  margin-bottom: 14px;
-  letter-spacing: 4px;
-}
-
-.hero__eyebrow {
-  font-family: var(--font-serif-en);
-  letter-spacing: 3px;
-  font-size: 11px;
-  color: var(--color-rose);
-  margin: 0 0 14px;
-  font-weight: 500;
-}
-
-.hero__bigdate {
-  line-height: 0.92;
-  margin: 0 0 20px;
-}
-
-.hero__bigdate-num {
-  display: block;
-  font-family: var(--font-serif-kr);
-  font-weight: 700;
-  font-size: 44px;
-  letter-spacing: 1px;
-  color: var(--color-rose-deep);
-}
-
-.hero__bigdate-dow {
-  display: block;
-  margin-top: 10px;
-  font-family: var(--font-serif-en);
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 5px;
-  color: var(--color-gold);
-}
-
-.hero--split .hero__bigdate-num {
-  color: #fffaf8;
-  text-shadow: 0 2px 12px rgba(20, 12, 14, 0.35);
-}
-
-.hero--split .hero__bigdate-dow {
-  color: #f6e4c4;
   text-shadow: 0 2px 10px rgba(20, 12, 14, 0.3);
 }
 
@@ -248,6 +219,14 @@ body {
 }
 
 /* ---------- 인사말 ---------- */
+.greeting__date {
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: var(--color-rose-deep);
+  margin: -16px 0 28px;
+}
+
 .greeting__message {
   font-size: 15.5px;
   line-height: 1.9;
@@ -644,14 +623,6 @@ body {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.intro__ornament {
-  color: var(--color-gold);
-  font-size: 20px;
-  letter-spacing: 4px;
-  margin: 0 0 16px;
-  animation-delay: 0.1s;
-}
-
 .intro__names {
   font-family: var(--font-serif-kr);
   font-weight: 500;
@@ -659,7 +630,7 @@ body {
   line-height: 1.5;
   margin: 0 0 14px;
   color: var(--color-ink);
-  animation-delay: 0.4s;
+  animation-delay: 0.1s;
 }
 
 .intro__amp {
@@ -677,7 +648,7 @@ body {
   color: var(--color-ink);
   margin: 0 0 22px;
   letter-spacing: 0.5px;
-  animation-delay: 0.7s;
+  animation-delay: 0.4s;
 }
 
 .intro__divider {
@@ -685,7 +656,7 @@ body {
   height: 1px;
   background: var(--color-gold);
   margin: 0 auto 18px;
-  animation-delay: 1s;
+  animation-delay: 0.7s;
 }
 
 .intro__date {
@@ -694,7 +665,7 @@ body {
   color: var(--color-rose-deep);
   margin: 0;
   font-weight: 600;
-  animation-delay: 1.3s;
+  animation-delay: 1s;
 }
 
 @media (prefers-reduced-motion: reduce) {
