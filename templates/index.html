@@ -51,11 +51,11 @@
       <img class="hero__photo" src="{{ url_for('static', filename='img/' ~ info.hero_photo) }}" alt="{{ info.groom_name_kr }}, {{ info.bride_name_kr }} 웨딩 사진">
     </div>
     {% endif %}
+    <div class="hero__meta">
+      <p class="hero__meta-date" id="hero-meta-date" data-date="{{ info.wedding_date }}" data-time="{{ info.wedding_time }}">{{ info.wedding_date[2:4] }}.{{ info.wedding_date[5:7] }}.{{ info.wedding_date[8:10] }}</p>
+      <p class="hero__eyebrow">Happy Wedding Day</p>
+    </div>
     <div class="hero__content">
-      <div class="hero__meta">
-        <p class="hero__meta-date" id="hero-meta-date" data-date="{{ info.wedding_date }}" data-time="{{ info.wedding_time }}">{{ info.wedding_date[2:4] }}.{{ info.wedding_date[5:7] }}.{{ info.wedding_date[8:10] }}</p>
-        <p class="hero__eyebrow">Happy Wedding Day</p>
-      </div>
       <div class="hero__row">
         <div class="hero__info">
           <h1 class="hero__names">
