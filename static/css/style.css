@@ -82,13 +82,13 @@ body {
   display: block;
 }
 
-/* 사진 아래쪽 약 30% 영역에 이름/날짜/장소를 겹쳐서 표시.
+/* 사진 아래쪽에 이름/장소를 겹쳐서 표시.
    음수 margin으로 사진 위로 끌어올리고, 배경 그라데이션이 스크림 역할을 함 */
 .hero--split .hero__content {
   position: relative;
   z-index: 2;
-  margin-top: -30vh;
-  padding: 60px 26px calc(30px + env(safe-area-inset-bottom, 0px));
+  margin-top: -16vh;
+  padding: 40px 26px calc(30px + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(
     180deg,
     rgba(35, 21, 26, 0) 0%,
@@ -98,14 +98,19 @@ body {
 }
 
 /* 큰 날짜(귀여운 손글씨 느낌) + 그 아래 Happy Wedding Day.
-   사진 위(hero--split)에서는 맨 위 왼쪽 정렬, 사진이 없을 때는 기존처럼 가운데 정렬 유지 */
+   사진 위(hero--split)에서는 사진 맨 위 왼쪽에 고정, 사진이 없을 때는 기존처럼 가운데 정렬 유지 */
 .hero__meta {
   margin: 0 0 20px;
 }
 
 .hero--split .hero__meta {
+  position: absolute;
+  top: calc(28px + env(safe-area-inset-top, 0px));
+  left: 26px;
+  right: 26px;
+  z-index: 3;
   text-align: left;
-  margin: 0 0 26px;
+  margin: 0;
 }
 
 .hero__meta-date {
