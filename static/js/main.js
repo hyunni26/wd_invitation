@@ -39,24 +39,24 @@
     el.innerHTML = html;
   }
 
-  /* ---------- 히어로 큰 날짜 아래 "토 2시" 채우기 ---------- */
+  /* ---------- 히어로 큰 날짜 뒤에 "토 2시" 이어붙이기 ---------- */
   function initHeroDate() {
-    const el = document.getElementById('hero-dow');
+    const el = document.getElementById('hero-meta-date');
     if (!el) return;
 
     const dateStr = el.dataset.date; // YYYY-MM-DD
     const timeStr = el.dataset.time; // HH:MM
     const [y, m, d] = dateStr.split('-').map(Number);
     const dowNames = ['일', '월', '화', '수', '목', '금', '토'];
-    let text = dowNames[new Date(y, m - 1, d).getDay()];
+    let suffix = ' ' + dowNames[new Date(y, m - 1, d).getDay()];
 
     if (timeStr) {
       const hour = Number(timeStr.split(':')[0]);
       const hour12 = hour % 12 === 0 ? 12 : hour % 12;
-      text += ' ' + hour12 + '시';
+      suffix += ' ' + hour12 + '시';
     }
 
-    el.textContent = text;
+    el.textContent = el.textContent + suffix;
   }
 
   /* ---------- 카운트다운 ---------- */
@@ -295,10 +295,21 @@
 
     document.body.style.overflow = 'hidden';
 
+    // 편지봉투 연출 타임라인 (ms, 페이지 진입 시점 기준)
+    // 받는 분 문구가 있으면 편지지를 읽을 시간을 1초 더 줌
+    const hasMessage = (new URLSearchParams(window.location.search).get('msg') || '').trim() !== '';
+    const T_FLIP = 4000;                          // 앞면 글씨 읽고 → 봉투 뒤집기
+    const T_OPEN = 5300;                          // 실링 떨어지고 덮개 열림
+    const T_LETTER = 6200;                        // 편지지 위로 올라옴
+    const T_HIDE = hasMessage ? 9400 : 8400;      // 본문으로 전환 시작
+
+    setTimeout(function () { intro.classList.add('is-flipped'); }, T_FLIP);
+    setTimeout(function () { intro.classList.add('is-opened'); }, T_OPEN);
+    setTimeout(function () { intro.classList.add('is-letter'); }, T_LETTER);
     setTimeout(function () {
       intro.classList.add('is-hiding');
       setTimeout(finish, 800); // CSS transition(0.8s)과 동일하게 맞춤
-    }, 6000); // 너무 빨리 넘어간다는 피드백으로 대기 시간을 2배로 늘림
+    }, T_HIDE);
   }
 
   /* ---------- Service Worker 등록 (PWA) ---------- */
