@@ -295,21 +295,59 @@
 
     document.body.style.overflow = 'hidden';
 
+    // 인트로는 항상 페이지 맨 위에서 끝나야 편지지가 메인 사진 자리로 정확히 커짐
+    // (새로고침 시 브라우저가 이전 스크롤 위치를 복원하는 것 방지)
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+
     // 편지봉투 연출 타임라인 (ms, 페이지 진입 시점 기준)
-    // 받는 분 문구가 있으면 편지지를 읽을 시간을 1초 더 줌
-    const hasMessage = (new URLSearchParams(window.location.search).get('msg') || '').trim() !== '';
-    const T_FLIP = 4000;                          // 앞면 글씨 읽고 → 봉투 뒤집기
-    const T_OPEN = 5300;                          // 실링 떨어지고 덮개 열림
-    const T_LETTER = 6200;                        // 편지지 위로 올라옴
-    const T_HIDE = hasMessage ? 9400 : 8400;      // 본문으로 전환 시작
+    const T_FLIP = 4000;     // 앞면 글씨 읽고 → 봉투 뒤집기
+    const T_OPEN = 5300;     // 실링 떨어지고 덮개 열림
+    const T_LETTER = 6200;   // 편지지(첫 페이지) 위로 올라옴
+    const T_EXPAND = 7600;   // 편지지가 화면 가득 커지며 메인 사진 자리로
+    const T_HIDE = 8600;     // 남은 배경이 사라지며 실제 페이지가 드러남
 
     setTimeout(function () { intro.classList.add('is-flipped'); }, T_FLIP);
     setTimeout(function () { intro.classList.add('is-opened'); }, T_OPEN);
     setTimeout(function () { intro.classList.add('is-letter'); }, T_LETTER);
+    setTimeout(function () { expandLetter(intro); }, T_EXPAND);
     setTimeout(function () {
       intro.classList.add('is-hiding');
       setTimeout(finish, 800); // CSS transition(0.8s)과 동일하게 맞춤
     }, T_HIDE);
+  }
+
+  // 봉투에서 나온 편지지를 실제 페이지의 메인 사진 위치/크기까지 키움
+  function expandLetter(intro) {
+    const letter = intro.querySelector('.envelope__letter');
+    const target = document.querySelector('.hero__photo-frame') || document.querySelector('.hero');
+    if (!letter || !target) return;
+
+    const from = letter.getBoundingClientRect();
+    const to = target.getBoundingClientRect();
+
+    const page = document.createElement('div');
+    page.className = 'intro__page';
+    const letterStyle = getComputedStyle(letter);
+    page.style.backgroundImage = letterStyle.backgroundImage;
+    page.style.left = from.left + 'px';
+    page.style.top = from.top + 'px';
+    page.style.width = from.width + 'px';
+    page.style.height = from.height + 'px';
+
+    intro.appendChild(page);
+    letter.style.visibility = 'hidden';
+    intro.classList.add('is-expanding');
+
+    // 시작 위치를 먼저 그린 다음 목표 위치로 바꿔야 transition이 동작함
+    page.getBoundingClientRect();
+    requestAnimationFrame(function () {
+      page.classList.add('is-full');
+      page.style.left = to.left + 'px';
+      page.style.top = to.top + 'px';
+      page.style.width = to.width + 'px';
+      page.style.height = Math.min(to.height, window.innerHeight - to.top) + 'px';
+    });
   }
 
   /* ---------- Service Worker 등록 (PWA) ---------- */
