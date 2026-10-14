@@ -764,19 +764,31 @@ body {
   background-position: center;
   border-radius: 4px;
   box-shadow: 0 4px 14px rgba(143, 74, 94, 0.14);
-  transition: transform 1.2s cubic-bezier(0.3, 0.8, 0.3, 1);
+  /* 점점 빨라지며 쭉 빠져나옴 → 다 빠져나온 순간 그 속도 그대로 화면 크기로 커짐 */
+  transition: transform 0.8s cubic-bezier(0.55, 0, 0.8, 0.4);
 }
 
+/* 봉투 위로 완전히 빠져나올 때까지 올라감 */
 .intro.is-letter .envelope__letter {
-  transform: translateY(-62%);
+  transform: translateY(-104%);
 }
 
-/* 편지지가 올라온 뒤: 봉투는 사라지고 편지지(첫 페이지)가 화면 가득 커짐 */
+/* 편지지가 빠져나온 뒤: 편지지는 화면 가득 커지고, 봉투는 아래로 살짝 가라앉으며 사라짐 */
 .envelope {
-  transition: opacity 0.5s ease;
+  transition: opacity 0.7s ease, transform 0.9s ease;
 }
 
 .intro.is-expanding .envelope {
+  opacity: 0;
+  transform: translateY(40px) scale(0.94);
+}
+
+/* 봉투가 돌기 시작하면 앞면 글씨는 바로 사라짐 (돌아가는 동안 글씨가 남아 보이지 않게) */
+.envelope__front .intro__inner {
+  transition: opacity 0.18s ease;
+}
+
+.intro.is-flipped .envelope__front .intro__inner {
   opacity: 0;
 }
 
@@ -787,13 +799,14 @@ body {
   background-position: center;
   border-radius: 4px;
   box-shadow: 0 10px 30px rgba(143, 74, 94, 0.18);
+  /* 빠져나오던 속도를 이어받아 빠르게 시작해서 부드럽게 멈춤 */
   transition:
-    top 0.9s cubic-bezier(0.65, 0, 0.35, 1),
-    left 0.9s cubic-bezier(0.65, 0, 0.35, 1),
-    width 0.9s cubic-bezier(0.65, 0, 0.35, 1),
-    height 0.9s cubic-bezier(0.65, 0, 0.35, 1),
-    border-radius 0.9s ease,
-    box-shadow 0.9s ease;
+    top 1s cubic-bezier(0.2, 0.75, 0.25, 1),
+    left 1s cubic-bezier(0.2, 0.75, 0.25, 1),
+    width 1s cubic-bezier(0.2, 0.75, 0.25, 1),
+    height 1s cubic-bezier(0.2, 0.75, 0.25, 1),
+    border-radius 1s ease,
+    box-shadow 1s ease;
 }
 
 .intro__page.is-full {
