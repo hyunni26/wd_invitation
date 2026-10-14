@@ -756,11 +756,14 @@ body {
   bottom: 6%;
   height: 92%;
   z-index: 2;
-  background: #fffdfb;
+  /* 메인 사진이 있으면 index.html에서 background-image로 들어감 */
+  background:
+    radial-gradient(120% 90% at 50% -10%, var(--color-blush) 0%, transparent 60%),
+    linear-gradient(180deg, #fdf6f4 0%, var(--color-card) 100%);
+  background-size: cover;
+  background-position: center;
   border-radius: 4px;
   box-shadow: 0 4px 14px rgba(143, 74, 94, 0.14);
-  padding: 22px 18px;
-  text-align: center;
   transition: transform 1.2s cubic-bezier(0.3, 0.8, 0.3, 1);
 }
 
@@ -768,26 +771,39 @@ body {
   transform: translateY(-62%);
 }
 
-.envelope__letter-title {
-  font-family: var(--font-serif-kr);
-  font-size: 19px;
-  font-weight: 700;
-  color: var(--color-rose-deep);
-  margin: 0 0 12px;
+/* 편지지가 올라온 뒤: 봉투는 사라지고 편지지(첫 페이지)가 화면 가득 커짐 */
+.envelope {
+  transition: opacity 0.5s ease;
 }
 
-.envelope__letter-title span {
-  color: var(--color-gold);
-  font-size: 15px;
+.intro.is-expanding .envelope {
+  opacity: 0;
 }
 
-.envelope__letter-msg {
-  font-size: 13.5px;
-  line-height: 1.75;
-  color: var(--color-ink);
-  margin: 0;
-  white-space: pre-line;
-  word-break: keep-all;
+.intro__page {
+  position: fixed;
+  z-index: 10;
+  background-size: cover;
+  background-position: center;
+  border-radius: 4px;
+  box-shadow: 0 10px 30px rgba(143, 74, 94, 0.18);
+  transition:
+    top 0.9s cubic-bezier(0.65, 0, 0.35, 1),
+    left 0.9s cubic-bezier(0.65, 0, 0.35, 1),
+    width 0.9s cubic-bezier(0.65, 0, 0.35, 1),
+    height 0.9s cubic-bezier(0.65, 0, 0.35, 1),
+    border-radius 0.9s ease,
+    box-shadow 0.9s ease;
+}
+
+.intro__page.is-full {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* 커진 편지지와 실제 페이지가 정확히 겹치도록, 마지막 페이드 때는 확대 효과 없이 사라짐 */
+.intro.is-expanding.is-hiding {
+  transform: none;
 }
 
 /* 앞쪽 주머니(V자): 편지지 아랫부분을 가림 */
