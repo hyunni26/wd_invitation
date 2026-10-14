@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>청첩장 링크 만들기</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f1ee;
+    --card: #fffaf8;
+    --blush: #f3dde4;
+    --blush-deep: #e8b9c4;
+    --rose: #b3667c;
+    --rose-deep: #8f4a5e;
+    --ink: #4a3b3f;
+    --ink-soft: #8a7a7e;
+    --line: #ecdde0;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background: var(--bg);
+    font-family: 'Gowun Batang', serif;
+    color: var(--ink);
+    display: flex;
+    justify-content: center;
+    padding: 32px 16px 60px;
+  }
+  .wrap { width: 100%; max-width: 440px; }
+  h1 {
+    font-size: 20px;
+    color: var(--rose-deep);
+    text-align: center;
+    margin: 8px 0 6px;
+  }
+  .sub {
+    text-align: center;
+    font-size: 13px;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+    line-height: 1.6;
+  }
+  .card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 22px 20px;
+    box-shadow: 0 12px 32px rgba(179, 102, 124, 0.12);
+  }
+  label {
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--rose-deep);
+    margin: 0 0 8px;
+  }
+  .field + .field { margin-top: 18px; }
+  input[type="text"], textarea {
+    width: 100%;
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    padding: 12px 14px;
+    font: inherit;
+    font-size: 15px;
+    color: var(--ink);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input[type="text"]:focus, textarea:focus { border-color: var(--blush-deep); }
+  textarea { resize: vertical; min-height: 96px; line-height: 1.6; }
+  .counter {
+    text-align: right;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    margin-top: 4px;
+  }
+  .result {
+    margin-top: 22px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--line);
+  }
+  .link-box {
+    word-break: break-all;
+    font-size: 12.5px;
+    line-height: 1.6;
+    background: #fbf3f1;
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--ink);
+    min-height: 44px;
+  }
+  .link-box.is-empty { color: var(--ink-soft); }
+  .btns {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+  }
+  button {
+    flex: 1;
+    border: 1px solid var(--blush-deep);
+    background: #fff;
+    color: var(--rose-deep);
+    border-radius: 999px;
+    padding: 11px 0;
+    font: inherit;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  button.primary { background: var(--rose); border-color: var(--rose); color: #fff; }
+  button:disabled { opacity: 0.4; cursor: default; }
+  .history { margin-top: 28px; }
+  .history h2 {
+    font-size: 14px;
+    color: var(--rose-deep);
+    margin: 0 0 10px;
+  }
+  .history ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .history li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    background: var(--card);
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 13.5px;
+  }
+  .history li button { flex: 0 0 auto; padding: 6px 14px; font-size: 12px; }
+  .history .empty { font-size: 12.5px; color: var(--ink-soft); }
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--rose-deep);
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 13px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s;
+  }
+  .toast.show { opacity: 1; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>청첩장 링크 만들기</h1>
+  <p class="sub">받는 분 이름과 문구를 넣으면<br>그 분만을 위한 청첩장 링크가 만들어져요.</p>
+
+  <div class="card">
+    <div class="field">
+      <label for="to">받는 분 이름</label>
+      <input type="text" id="to" maxlength="20" placeholder="예: 김민지" autocomplete="off">
+    </div>
+    <div class="field">
+      <label for="msg">전하고 싶은 문구 <span style="font-weight:400;color:var(--ink-soft)">(선택)</span></label>
+      <textarea id="msg" maxlength="150" placeholder="예: 바쁘시겠지만 꼭 와주셔서 자리를 빛내주세요!"></textarea>
+      <div class="counter"><span id="msg-count">0</span> / 150</div>
+    </div>
+
+    <div class="result">
+      <label>만들어진 링크</label>
+      <div class="link-box is-empty" id="link">이름이나 문구를 입력하면 여기에 링크가 나타나요</div>
+      <div class="btns">
+        <button type="button" class="primary" id="btn-copy" disabled>링크 복사</button>
+        <button type="button" id="btn-share" disabled>공유하기</button>
+        <button type="button" id="btn-preview" disabled>미리보기</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="history">
+    <h2>이번에 만든 링크</h2>
+    <ul id="history"><li class="empty">아직 복사한 링크가 없어요</li></ul>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  var BASE_URL = window.location.origin + '/';
+  var toInput = document.getElementById('to');
+  var msgInput = document.getElementById('msg');
+  var msgCount = document.getElementById('msg-count');
+  var linkBox = document.getElementById('link');
+  var btnCopy = document.getElementById('btn-copy');
+  var btnShare = document.getElementById('btn-share');
+  var btnPreview = document.getElementById('btn-preview');
+  var historyList = document.getElementById('history');
+  var toastEl = document.getElementById('toast');
+  var currentLink = '';
+  var toastTimer = null;
+
+  if (!navigator.share) {
+    btnShare.style.display = 'none';
+  }
+
+  function buildLink() {
+    var to = toInput.value.trim();
+    var msg = msgInput.value.trim();
+    msgCount.textContent = msgInput.value.length;
+
+    if (!to && !msg) {
+      currentLink = '';
+      linkBox.textContent = '이름이나 문구를 입력하면 여기에 링크가 나타나요';
+      linkBox.classList.add('is-empty');
+      setButtons(false);
+      return;
+    }
+
+    var params = new URLSearchParams();
+    if (to) params.set('to', to);
+    if (msg) params.set('msg', msg);
+    currentLink = BASE_URL + '?' + params.toString();
+
+    linkBox.textContent = currentLink;
+    linkBox.classList.remove('is-empty');
+    setButtons(true);
+  }
+
+  function setButtons(enabled) {
+    btnCopy.disabled = !enabled;
+    btnShare.disabled = !enabled;
+    btnPreview.disabled = !enabled;
+  }
+
+  function showToast(text) {
+    toastEl.textContent = text;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toastEl.classList.remove('show'); }, 1600);
+  }
+
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) {
+      return navigator.clipboard.writeText(text);
+    }
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try {
+        document.execCommand('copy') ? resolve() : reject();
+      } catch (e) {
+        reject(e);
+      }
+      document.body.removeChild(ta);
+    });
+  }
+
+  function addHistory(name, link) {
+    var empty = historyList.querySelector('.empty');
+    if (empty) empty.remove();
+
+    // 같은 링크를 다시 복사하면 중복으로 쌓지 않음
+    var items = historyList.querySelectorAll('li');
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].dataset.link === link) return;
+    }
+
+    var li = document.createElement('li');
+    li.dataset.link = link;
+    var label = document.createElement('span');
+    label.textContent = name ? name + '님' : '(이름 없음)';
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.textContent = '다시 복사';
+    btn.addEventListener('click', function () {
+      copyText(link).then(function () { showToast('복사되었습니다'); })
+        .catch(function () { showToast('복사에 실패했어요'); });
+    });
+    li.appendChild(label);
+    li.appendChild(btn);
+    historyList.insertBefore(li, historyList.firstChild);
+  }
+
+  toInput.addEventListener('input', buildLink);
+  msgInput.addEventListener('input', buildLink);
+
+  btnCopy.addEventListener('click', function () {
+    if (!currentLink) return;
+    var name = toInput.value.trim();
+    var link = currentLink;
+    copyText(link).then(function () {
+      showToast('링크가 복사되었어요');
+      addHistory(name, link);
+    }).catch(function () {
+      showToast('복사에 실패했어요. 링크를 길게 눌러 복사해주세요');
+    });
+  });
+
+  btnShare.addEventListener('click', function () {
+    if (!currentLink || !navigator.share) return;
+    var name = toInput.value.trim();
+    var link = currentLink;
+    navigator.share({
+      title: '모바일 청첩장',
+      text: name ? name + '님, 저희 결혼식에 초대합니다.' : '저희 결혼식에 초대합니다.',
+      url: link
+    }).then(function () {
+      addHistory(name, link);
+    }).catch(function () { /* 사용자가 공유창을 닫은 경우 무시 */ });
+  });
+
+  btnPreview.addEventListener('click', function () {
+    if (currentLink) window.open(currentLink, '_blank');
+  });
+})();
+</script>
+</body>
+</html>
