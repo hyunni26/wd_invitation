@@ -301,11 +301,11 @@
     window.scrollTo(0, 0);
 
     // 편지봉투 연출 타임라인 (ms, 페이지 진입 시점 기준)
-    const T_FLIP = 4000;     // 앞면 글씨 읽고 → 봉투 뒤집기
+    const T_FLIP = 4000;     // 앞면 글씨 읽고 → 봉투 뒤집기 (글씨는 0.18초 만에 먼저 사라짐)
     const T_OPEN = 5300;     // 실링 떨어지고 덮개 열림
-    const T_LETTER = 6200;   // 편지지(첫 페이지) 위로 올라옴
-    const T_EXPAND = 7600;   // 편지지가 화면 가득 커지며 메인 사진 자리로
-    const T_HIDE = 8600;     // 남은 배경이 사라지며 실제 페이지가 드러남
+    const T_LETTER = 6000;   // 편지지(첫 페이지)가 쭉 빠져나옴 (0.8초, CSS와 동일)
+    const T_EXPAND = 6800;   // 다 빠져나온 순간 멈춤 없이 화면 가득 커짐 (1초) + 봉투 사라짐
+    const T_HIDE = 7900;     // 남은 배경이 사라지며 실제 페이지가 드러남
 
     setTimeout(function () { intro.classList.add('is-flipped'); }, T_FLIP);
     setTimeout(function () { intro.classList.add('is-opened'); }, T_OPEN);
