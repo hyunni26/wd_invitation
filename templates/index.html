@@ -52,16 +52,9 @@
         </div>
       </div>
 
-      <!-- 봉투 뒷면: 덮개 + 실링, 안에 편지지 -->
+      <!-- 봉투 뒷면: 덮개 + 실링, 안에는 초대장 첫 페이지(메인 사진)가 들어 있음 -->
       <div class="envelope__face envelope__back" aria-hidden="true">
-        <div class="envelope__letter">
-          <p class="envelope__letter-title">초대합니다 <span>♥</span></p>
-          {% if guest_msg %}
-          <p class="envelope__letter-msg">{{ guest_msg }}</p>
-          {% else %}
-          <p class="envelope__letter-msg">소중한 분들을 모시고<br>새로운 시작을 함께하고 싶습니다.</p>
-          {% endif %}
-        </div>
+        <div class="envelope__letter"{% if info.hero_photo %} style="background-image: url('{{ url_for('static', filename='img/' ~ info.hero_photo) }}');"{% endif %}></div>
         <div class="envelope__pocket"></div>
         <div class="envelope__flap"></div>
         <div class="envelope__seal">♥</div>
