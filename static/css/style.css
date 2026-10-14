@@ -673,6 +673,61 @@ body {
   animation-delay: 1s;
 }
 
+/* ---------- 받는 분 개인화 (?to=이름&msg=문구) ---------- */
+.intro__to {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--color-rose);
+  letter-spacing: 0.5px;
+  margin: 0 0 22px;
+  animation-delay: 0.1s;
+}
+
+/* 받는 분 이름이 있을 때는 이름 줄이 먼저 뜨고, 나머지가 한 박자씩 뒤로 밀림 */
+.intro--personal .intro__names   { animation-delay: 0.4s; }
+.intro--personal .intro__phrase  { animation-delay: 0.7s; }
+.intro--personal .intro__divider { animation-delay: 1s; }
+.intro--personal .intro__date    { animation-delay: 1.3s; }
+
+.intro__msg {
+  max-width: 280px;
+  margin: 26px auto 0;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--color-ink-soft);
+  white-space: pre-line;
+  word-break: keep-all;
+  animation-delay: 1.6s;
+}
+
+.guest-note {
+  background: linear-gradient(180deg, #fbf0f2, #fdf7f6);
+  border: 1px solid var(--color-line);
+  border-radius: 16px;
+  padding: 20px 22px;
+  margin: 0 0 40px;
+}
+
+.guest-note__to {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--color-rose-deep);
+  margin: 0;
+}
+
+.guest-note__to + .guest-note__msg {
+  margin-top: 10px;
+}
+
+.guest-note__msg {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--color-ink);
+  margin: 0;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .intro { transition: none; }
   .intro__inner > * { animation: none; opacity: 1; transform: none; }
